@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}
+	Summary
+{% endblock %}
+	
+{% block body %}
+<br>
+<div class="container">
+    <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Order No</th>
+                <th scope="col">Lot no</th>
+                <th scope="col">Roll no</th>
+                <th scope="col">Fabric type</th>
+                <th scope="col">Acceptance Points(yards square)</th>
+                <th scope="col">Acceptance Points(meter square)</th>
+                <th scope="col">Fabric Width</th>
+                <th scope="col">Deviation</th>
+                <th scope="col">Defect Type</th>
+                <th scope="col">Total Linear Points</th>
+                <th scope="col">Total Hole Points</th>
+                <th scope="col">Linear + Hole Points</th>
+                <th scope="col">Points/100 sq yards</th>
+                <th scope="col">Points/100 sq m</th>
+                <th scope="col">Points/100 sq cm</th>
+                <th scope="col">Acceptance</th>
+                <th scope="col">Grade</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fabric in fabrics %}
+        <tr>
+            <td>{{fabric.orderNo}}</td>
+            <td>{{fabric.lotNo}}</td>
+            <td>{{fabric.rollNo}}</td>
+            <td>{{fabric.fabric}}</td>
+            <td>{{fabric.acceptYards}}</td>
+            <td>{{fabric.acceptMeter}}</td>
+            <td>{{fabric.fWidth}}</td>
+            <td>{{fabric.deviation}}</td>
+            <td>{{fabric.defect}}</td>
+            <td>{{fabric.linearPoints}}</td>
+            <td>{{fabric.holePoints}}</td>
+            <td>{{fabric.totalPoints}}</td>
+            <td>{{fabric.pointsyards}}</td>
+            <td>{{fabric.pointsperm}}</td>
+            <td>{{fabric.pointspercm}}</td>
+            <td>{{fabric.acceptance}}</td>
+            <td>{{fabric.grade}}</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+        </table>
+        </div>
+        <a href="{% url 'index' %}">Go back to the inspection form</a>
+    </div>
+{% endblock %}

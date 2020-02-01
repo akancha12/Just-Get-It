@@ -1,0 +1,189 @@
+{% extends "base.html" %}
+{% block title %}
+	Fabric Inspection Form
+{% endblock %}
+	
+{% block body %}
+	
+	<div class="container">
+	<h2 class="m1">CUTTING DEPARTMENT</h2>
+	<form action="{% url 'sub' %}" method="post">
+		{% csrf_token %}
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label">Upload File</label>
+    		<div class="col-sm-4">
+      		<input type="file" class="form-control">
+    		</div>
+		</div>
+		<div class="form-group row">
+			<label for="orderNo" class="col-sm-2 col-form-label">Order Number</label>
+    		<div class="col-sm-4">
+      		<input type="text" name="orderNo" class="form-control" id="orderNo">
+    		</div>
+		</div>
+		<div class="form-group row">
+			<label for="lotNo" class="col-sm-2 col-form-label">Lot Number</label>
+    		<div class="col-sm-4">
+      		<input type="text" class="form-control" name="lotNo" id="lotNo">
+    		</div>
+		</div>
+		<div class="form-group row">
+			<label for="rollNo" class="col-sm-2 col-form-label">Roll Number</label>
+    		<div class="col-sm-4">
+      		<input type="text" class="form-control" name="rollNo" id="rollNo">
+    		</div>
+		</div>
+		<div class="form-group row">
+			<label for="fType" class="col-sm-2 col-form-label">Fabric Types</label>
+    		<div class="col-sm-4">
+			  <select class="form-control" id="fType" onchange="defectChange(this);" name="fType">
+			  <option value="">Select Type</option>
+		      <option value="Knits">Knits</option>
+		      <option value="Woven">Woven</option>
+		      <option value="Checks">Checks</option>
+		      <option value="Stripes">Stripes</option>
+		      <option value="Printed">Printed</option>
+			  <option value="Yarn Dye">Yarn Dye</option>	
+			  <option value="Fibre Dye">Fibre Dye</option>
+			  <option value="Piece Dye">Piece Dye</option>
+    		</select>
+    		</div>
+    		<label for="acceptP1" class="col-sm-2 col-form-label">Acceptance Points <span>&#x28;</span>yards square<span>&#41;</span></label>
+    		<div class="col-sm-4">
+      		<input type="text" class="form-control" id="acceptP1" name="acceptP1" value="0" readonly>
+    		</div>
+		</div>
+		<div class="form-group row">
+			<div class="col-sm-6"></div>
+			<label for="acceptP2" class="col-sm-2 col-form-label">Acceptance Points <span>&#x28;</span>meter square<span>&#41;</span></label>
+    		<div class="col-sm-4">
+      		<input type="text" class="form-control" id="acceptP2" name="acceptP2" value="0" readonly>
+    		</div>
+		</div>
+		<div class="form-group row">
+			<label for="fWidth" class="col-sm-2 col-form-label">Fabric Width</label>
+    		<div class="col-sm-2">
+      		<input type="text" class="form-control" id="fWidth" name="fWidth">
+    		</div>
+        <div class="col-sm-2">
+		  <select class="form-control" id="units" name="units" onchange="unitChange(this);">
+		  <option value="">Unit</option>
+          <option value="m">m</option>
+          <option value="cm">cm</option>
+          <option value="ft">ft</option>
+          <option value="4">4</option>
+          <option value="5">5</option>  
+        </select>
+        </div>
+		</div>
+		<div class="form-group row">
+			<label for="slength" class="col-sm-2 col-form-label">Sticked Roll Length</label>
+    		<div class="col-sm-3">
+      		<input type="text" class="form-control" id="slength" name="slength" placeholder="0" onkeyup="devMeasure();">
+    		</div>
+    		<div class="col-sm-1">
+      		<input type="text" class="form-control" id="units2" readonly>
+    		</div>
+		</div>
+		<div class="form-group row">
+			<label for="alength" class="col-sm-2 col-form-label">Actual Roll Length</label>
+    		<div class="col-sm-3">
+      		<input type="text" class="form-control" id="alength" name="alength" placeholder="0" onkeyup="devMeasure();">
+    		</div>
+    		<div class="col-sm-1">
+      		<input type="text" class="form-control" id="units3" readonly>
+    		</div>
+        <label for="deviation" class="col-sm-2 col-form-label">Deviation</label>
+        <div class="col-sm-4">
+          <input type="text" class="form-control" id="deviation" name="deviation" readonly>
+        </div>
+		</div>
+		<div class="form-group row">
+			<div class="col-sm-6"></div>
+			<label for="units4" class="col-sm-2 col-form-label">Units4</label>
+    		<div class="col-sm-4">
+      		<input type="text" class="form-control" id="units4" readonly>
+    		</div>
+		</div>
+		<div class="form-group row">
+			<label for="dType" class="col-sm-2 col-form-label">Defect Type</label>
+    		<div class="col-sm-4">
+      		<select class="form-control" id="dType" name="dType">
+		      <option>Select the defect</option>	
+    		</select>
+    		</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-4 col-form-label"> Number of Defects for : </label>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label" for="d3"> less than 3<span>&#x22;</span></label>
+			<div class="col-sm-4">
+      		<input type="text" class="form-control" id="d3" name="d3" onkeyup="tlhPoints();" placeholder="0">
+      		</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label" for="d36"> between 3<span>&#x22;</span> and 6<span>&#x22;</span> </label>
+			<div class="col-sm-4">
+      		<input type="text" class="form-control" id="d36" name="d36" onkeyup="tlhPoints();" placeholder="0">
+      		</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label" for="d69"> between 6<span>&#x22;</span> and 9<span>&#x22;</span> </label>
+			<div class="col-sm-4">
+      		<input type="text" class="form-control" id="d69" name="d69" onkeyup="tlhPoints();" placeholder="0">
+      		</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label" for="d9"> greater than 9<span>&#x22;</span> </label>
+			<div class="col-sm-4">
+      		<input type="text" class="form-control" id="d9" name="d9" onkeyup="tlhPoints();" placeholder="0">
+      		</div>
+      		<label class="col-sm-2 col-form-label" for="totalPoints"> Total Linear Points </label>
+			<div class="col-sm-4">
+      		<input type="text" class="form-control" id="totalPoints" name="totalPoints" readonly>
+      		</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label" for="n01"> No. of holes (0-1)<span>&#x22;</span> </label>
+			<div class="col-sm-4">
+      		<input type="text" class="form-control" id="n01" name="n01" onkeyup="tlhPoints();" placeholder="0">
+      		</div>
+		</div>
+		<div class="form-group row">
+			<label class="col-sm-2 col-form-label" for="ng1"> No. of holes <span>&#62;</span>1<span>&#x22;</span> </label>
+			<div class="col-sm-4">
+      		<input type="text" class="form-control" id="ng1" name="ng1" onkeyup="tlhPoints();" placeholder="0">
+			</div>
+			<label for="hp" class="col-sm-2 col-form-label">Total Hole Points</label>
+        	<div class="col-sm-4">
+          	<input type="text" class="form-control" id="hp" name="hp" readonly>
+        	</div>  
+		</div>
+		<div class="form-group row">
+			<label for="p100y" class="col-sm-2 col-form-label">Points/100 sq yards</label>
+        	<div class="col-sm-4">
+          	<input type="text" class="form-control" id="p100" name="p100" value="0" readonly>
+			</div>
+			<label for="tlp" class="col-sm-2 col-form-label">Total Linear + Hole Points</label>
+        	<div class="col-sm-4">
+          	<input type="text" class="form-control" id="tlp" name="tlp" readonly>
+        	</div>  
+		</div>
+		<div class="form-group row">
+			<label for="p100m" class="col-sm-2 col-form-label">Points/100 sq meters</label>
+        	<div class="col-sm-4">
+          	<input type="text" class="form-control" id="p100m" name="p100m" value="0" readonly>
+			</div> 
+			<label for="p100cm" class="col-sm-2 col-form-label">Points/100 sq cms</label>
+        	<div class="col-sm-4">
+          	<input type="text" class="form-control" id="p100cm" name="p100cm" value="0" readonly>
+			</div> 
+		</div>
+		<input type="submit" class="btn btn-primary">
+	</form>
+	<div class="row">
+	<div class="col-sm-6 m2"><a href="{% url 'summary' %}">View Summary</a></div>
+	<div class="col-sm-6 m2"><a href="{% url 'summary' %}">View overall Summary</a></div>
+	</div></div>
+{% endblock %}
