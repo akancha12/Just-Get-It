@@ -63,6 +63,7 @@ function defectChange(selectObj){
 function tlhPoints(){
     var n=linearPoints()+holePoints();
     document.getElementById("tlp").value=n;
+    return n;
 }
 
 function linearPoints(){
@@ -92,4 +93,14 @@ function holePoints(){
     hpoints=(Number(n01)*2)+(Number(ng1)*4);
     document.getElementById("hp").value=hpoints;  
     return hpoints; 
+}
+
+function pointsPerUnit(){
+    var totalYardsInspected=1; //totalYardsInspected NOT CLEAR YET
+    var pointsYard=(tlhPoints()*3600)/((Number(document.getElementById("fWidth").value))*totalYardsInspected);
+    document.getElementById("p100").value=Number(pointsYard);
+    console.log(pointsYard);
+    document.getElementById("p100m").value=Number(pointsYard/0.83612736);
+    document.getElementById("p100cm").value=Number(pointsYard/8361.2736);
+    // Change models.py to accept decimal values
 }

@@ -40,7 +40,7 @@ def sub(request):
         f.hole1=int(request.POST["ng1"])
         f.holePoints=int(request.POST["hp"])
         # p100=int(request.POST["p100"])
-        f.pointsyards=0
+        f.pointsyards=int(request.POST["p100"])
         f.totalPoints=int(request.POST["tlp"])
         # p100m=int(request.POST["p100m"])
         # p100cm=int(request.POST["p100cm"])

@@ -6,7 +6,7 @@
 {% block body %}
 	
 	<div class="container">
-	<h2 class="m1">CUTTING DEPARTMENT</h2>
+	<h2 class="m1">FABRIC INSPECTION</h2>
 	<form action="{% url 'sub' %}" method="post">
 		{% csrf_token %}
 		<div class="form-group row">
@@ -71,7 +71,7 @@
           <option value="m">m</option>
           <option value="cm">cm</option>
           <option value="ft">ft</option>
-          <option value="4">4</option>
+          <option value="4">inch</option>
           <option value="5">5</option>  
         </select>
         </div>
@@ -119,25 +119,25 @@
 		<div class="form-group row">
 			<label class="col-sm-2 col-form-label" for="d3"> less than 3<span>&#x22;</span></label>
 			<div class="col-sm-4">
-      		<input type="text" class="form-control" id="d3" name="d3" onkeyup="tlhPoints();" placeholder="0">
+      		<input type="text" class="form-control" id="d3" name="d3" onkeyup="pointsPerUnit();" placeholder="0">
       		</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-sm-2 col-form-label" for="d36"> between 3<span>&#x22;</span> and 6<span>&#x22;</span> </label>
 			<div class="col-sm-4">
-      		<input type="text" class="form-control" id="d36" name="d36" onkeyup="tlhPoints();" placeholder="0">
+      		<input type="text" class="form-control" id="d36" name="d36" onkeyup="pointsPerUnit();" placeholder="0">
       		</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-sm-2 col-form-label" for="d69"> between 6<span>&#x22;</span> and 9<span>&#x22;</span> </label>
 			<div class="col-sm-4">
-      		<input type="text" class="form-control" id="d69" name="d69" onkeyup="tlhPoints();" placeholder="0">
+      		<input type="text" class="form-control" id="d69" name="d69" onkeyup="pointsPerUnit();" placeholder="0">
       		</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-sm-2 col-form-label" for="d9"> greater than 9<span>&#x22;</span> </label>
 			<div class="col-sm-4">
-      		<input type="text" class="form-control" id="d9" name="d9" onkeyup="tlhPoints();" placeholder="0">
+      		<input type="text" class="form-control" id="d9" name="d9" onkeyup="pointsPerUnit();" placeholder="0">
       		</div>
       		<label class="col-sm-2 col-form-label" for="totalPoints"> Total Linear Points </label>
 			<div class="col-sm-4">
@@ -147,13 +147,13 @@
 		<div class="form-group row">
 			<label class="col-sm-2 col-form-label" for="n01"> No. of holes (0-1)<span>&#x22;</span> </label>
 			<div class="col-sm-4">
-      		<input type="text" class="form-control" id="n01" name="n01" onkeyup="tlhPoints();" placeholder="0">
+      		<input type="text" class="form-control" id="n01" name="n01" onkeyup="pointsPerUnit();" placeholder="0">
       		</div>
 		</div>
 		<div class="form-group row">
 			<label class="col-sm-2 col-form-label" for="ng1"> No. of holes <span>&#62;</span>1<span>&#x22;</span> </label>
 			<div class="col-sm-4">
-      		<input type="text" class="form-control" id="ng1" name="ng1" onkeyup="tlhPoints();" placeholder="0">
+      		<input type="text" class="form-control" id="ng1" name="ng1" onkeyup="pointsPerUnit();" placeholder="0">
 			</div>
 			<label for="hp" class="col-sm-2 col-form-label">Total Hole Points</label>
         	<div class="col-sm-4">
